@@ -8,9 +8,7 @@
 
 先跑`list.rb`
 
-再來`list_special.rb`(音樂系的網頁長得不太一樣)
-
-`last.rb`是爬中文系名和最低錄取名次用
+再來`list_special.rb`(音樂、體育系的網頁長得不太一樣)
 
 #資料來源
 [新鮮人查榜](https://freshman.tw/cross/)

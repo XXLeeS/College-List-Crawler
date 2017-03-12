@@ -4,6 +4,8 @@ require 'rest-client'
 require 'csv'
 require 'pg'
 
+require_relative 'database.rb'
+
 def integer_rank(text)
 	if text.include?("正")
 		return 1
@@ -24,9 +26,8 @@ url_base = "https://www.caac.ccu.edu.tw/caac103/103_Entrance_lz15/html_lz_h8/sta
 query_url = url_base + "standard_index.php"
 
 
-conn = PGconn.connect("localhost",5432,"","","college","postgres","1234")
 #remember to change table name for different year
-conn.prepare('insert_statement', 'INSERT INTO dep_103 (dep_no, name, last) VALUES ($1, $2, $3)')
+$conn.prepare('insert_statement', 'INSERT INTO dep_103 (dep_no, name, last) VALUES ($1, $2, $3)')
 
 
 
@@ -49,7 +50,7 @@ doc.css('table tbody tr:nth-child(n+3) td').each do |school|
 		name = school_name + row.css('td:nth-child(2)').text
 		last = integer_rank(row.css('td:nth-child(6)').text)
 
-		conn.exec_prepared('insert_statement', [dep_no, name, last])
+		$conn.exec_prepared('insert_statement', [dep_no, name, last])
 
 	end
 end
